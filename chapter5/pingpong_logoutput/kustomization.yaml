@@ -12,12 +12,6 @@ resources:
   - log_output/manifests/gateway.yaml
   - log_output/manifests/route.yaml
   - log_output/manifests/service.yaml
-configurations:
-  - ping_pong/manifests/kustomizeconfig.yaml
-secretGenerator:
-  - name: pingpong-postgres-password
-    envs:
-      - ./ping_pong/.env.gke
 images:
   - name: PING_PONG
     newName: vesajo/ping-pong@sha256:84365856b6d89b76136b3bebcffcb25619e8dba794ca6ce9b0b2bae733069db7

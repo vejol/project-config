@@ -1,7 +1,0 @@
-nameReference:
-  - kind: Secret
-    version: v1
-    fieldSpecs:
-      - group: argoproj.io
-        kind: Rollout
-        path: spec/template/spec/containers/envFrom/secretRef/name

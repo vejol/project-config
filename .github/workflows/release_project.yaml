@@ -2,9 +2,9 @@ name: Release project
 
 on:
   push:
-    branches: [ "**" ]
-    tags-ignore:
-      - "**"
+    branches: [ main ]
+    paths:
+      - "chapter5/project/**"
   workflow_dispatch:
 
 env:

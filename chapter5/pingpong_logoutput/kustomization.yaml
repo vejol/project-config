@@ -14,8 +14,8 @@ resources:
   - log_output/manifests/service.yaml
 images:
   - name: PING_PONG
-    newName: vesajo/ping-pong@sha256:84365856b6d89b76136b3bebcffcb25619e8dba794ca6ce9b0b2bae733069db7
+    newName: vesajo/ping-pong
   - name: HASH_GENERATOR
-    newName: vesajo/hash-generator@sha256:c864d479817f8705f6a8369bc7b2a6b1b69c0b5f0678477980db16fb5ad2b156
+    newName: vesajo/hash-generator
   - name: HASH_OUTPUTTER
-    newName: vesajo/hash-outputter@sha256:f7edb77bedab90f93de6d694d0ee093071401eb5b62270f8a0da005c6463ba91
+    newName: vesajo/hash-outputter

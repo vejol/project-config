@@ -41,7 +41,7 @@ jobs:
           docker push "${{ secrets.DOCKERHUB_USERNAME }}/hash-outputter:$GITHUB_SHA"
 
       - name: Set up Kustomize
-        uses: imranismail/setup-kustomize@v3
+        uses: imranismail/setup-kustomize@v2
 
       - name: Use right images
         working-directory: ./chapter5/pingpong_logoutput

@@ -2,11 +2,19 @@
 
 ## How to deploy to Google Cloud
 
-Deploy everything by pushing a new commit. The Github Actions takes care of the rest. Different branches will be deployed to the separate namespaces. The main branch will be deployed to <i>project</i> namespace.
+The application is managed by ArgoCD on the cluster. Simply commit and push your changes to GitHub — GitHub Actions and ArgoCD will take care of the rest.
 
-If you want to use automatic database backup, you need to add a Secret for the Google Service Account. The file `./todo-backend/manifests/google-sa-secret.enc.yaml` contains the required value encrypted using the `sops` and `age` tools. If you have the private key in your possession and it is stored in the default location `~/.config/sops/age/`, you can apply the secret to the cluster with the following command:
+The secrets must be added manually:
 
-`sops -d todo-backend/manifests/google-sa-secret.enc.yaml | kubectl apply -f -`
+- The Todo App requires a Secret for PostgreSQL database credentials
+- Automatic database backup needs a Secret for the Google Service Account
+
+The folder `./todo-backend/manifests/` contains the required secrets encrypted using the `sops` and `age` tools. If you have the private key in your possession and it is stored in the default location `~/.config/sops/age/`, you can apply the them to the cluster with the following commands:
+
+```
+sops -d todo-backend/manifests/google-sa-secret.enc.yaml | kubectl apply -f -
+sops -d todo-backend/manifests/secret.enc.yaml | kubectl apply -f -
+```
 
 ## Exercise 3.09: DBaaS vs DIY Comparison
 

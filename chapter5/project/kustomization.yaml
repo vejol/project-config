@@ -14,10 +14,6 @@ resources:
   - todo-backend/manifests/statefulset.yaml
   - todo-backend/manifests/cronjob-postgres-backup.yaml
   - todo-backend/manifests/postgres-config.yaml
-secretGenerator:
-  - name: todo-postgres-password
-    envs:
-      - ./todo-backend/.env
 images:
   - name: TODO_APP
     newName: vesajo/todo-app@sha256:5d7d7a8e9df63339b7f8ac1b6c61e722b55c1bf8d8a291cafeadbefaeb4c4a7b

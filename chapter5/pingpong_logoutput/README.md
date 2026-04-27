@@ -2,13 +2,32 @@
 
 ## How to deploy to Google Kubernetes Engine
 
-This app will be deployed to namespace `exercises`. You can create the namespace with `kubectl create namespace exercises`.
+### Manual deployment
 
-Deploy the app by running `kubectl apply -f log_output/manifests/ && kubectl apply -f ping_pong/manifests/`
+1. Create the file `ping_pong/.env.gke` based on the provided example file:
 
-In addition, you need to add a Secret for the Ping Pong application's PostgreSQL database. The file `./ping_pong/manifests/secret.enc.yaml` contains the required values encrypted with the `sops` and `age` tools. If you have the private key in the default location `~/.config/sops/age/`, you can apply the secret to the cluster with the following command:
+   ```
+   cp ping_pong/.env.gke.example ping_pong/.env.gke
+   ```
 
-`sops -d ping_pong/manifests/secret.enc.yaml | kubectl apply -f -`
+   Then fill in your password in the new file:
+
+   ```
+   POSTGRES_PASSWORD=<your-password>
+   ```
+
+   This password is used for the Ping Pong application's PostgreSQL database. The password used in the cluster is stored encrypted in `ping_pong/manifests/pingpong-postgres-password.enc.yaml`.
+
+2. Create the `exercises` namespace:
+
+   ```
+   kubectl create namespace exercises
+   ```
+
+3. Deploy the app:
+   ```
+   kubectl apply -k .
+   ```
 
 ## How to use App
 

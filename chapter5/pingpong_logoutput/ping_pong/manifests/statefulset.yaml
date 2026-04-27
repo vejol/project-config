@@ -26,7 +26,7 @@ spec:
               memory: "40Mi"
           envFrom:
             - secretRef:
-                name: pingpong-postgres-secret
+                name: pingpong-postgres-password
           ports:
             - name: web
               containerPort: 5432

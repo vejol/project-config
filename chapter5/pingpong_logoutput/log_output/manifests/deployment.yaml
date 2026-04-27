@@ -24,7 +24,7 @@ spec:
                 path: information.txt
       containers:
         - name: hash-generator
-          image: vesajo/hash-generator@sha256:c864d479817f8705f6a8369bc7b2a6b1b69c0b5f0678477980db16fb5ad2b156
+          image: HASH_GENERATOR
           env:
             - name: HASH_FILE_PATH
               value: "/app/files/hash.txt"
@@ -39,7 +39,7 @@ spec:
               cpu: "10m"
               memory: "50Mi"
         - name: hash-outputter
-          image: vesajo/hash-outputter@sha256:f7edb77bedab90f93de6d694d0ee093071401eb5b62270f8a0da005c6463ba91
+          image: HASH_OUTPUTTER
           readinessProbe:
             initialDelaySeconds: 5
             periodSeconds: 5

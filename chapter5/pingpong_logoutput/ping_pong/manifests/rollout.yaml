@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: ping-pong
-          image: vesajo/ping-pong@sha256:84365856b6d89b76136b3bebcffcb25619e8dba794ca6ce9b0b2bae733069db7
+          image: PING_PONG
           ports:
             - containerPort: 3000
           resources:
@@ -34,15 +34,13 @@ spec:
               cpu: "10m"
               memory: "40Mi"
           env:
-            - name: POSTGRES_PORT
-              value: "5432"
-            - name: POSTGRES_HOST
-              value: pingpong-postgres-svc
             - name: PORT
               value: "3000"
           envFrom:
+            - configMapRef:
+                name: pingpong-postgres-config
             - secretRef:
-                name: pingpong-postgres-secret
+                name: pingpong-postgres-password
           readinessProbe:
             initialDelaySeconds: 10
             periodSeconds: 5

@@ -51,6 +51,9 @@ jobs:
           kustomize edit set image PING_PONG=${{ secrets.DOCKERHUB_USERNAME }}/ping-pong:$GITHUB_SHA
           kustomize edit set image HASH_GENERATOR=${{ secrets.DOCKERHUB_USERNAME }}/hash-generator:$GITHUB_SHA
           kustomize edit set image HASH_OUTPUTTER=${{ secrets.DOCKERHUB_USERNAME }}/hash-outputter:$GITHUB_SHA
-          git add .
-          git commit -m "New version released `${GITHUB_SHA}`"
-          git push
+
+      - name: Commit kustomization.yaml to GitHub
+        uses: EndBug/add-and-commit@v10
+        with:
+          add: "chapter5/pingpong_logoutput/kustomization.yaml"
+          message: New version released ${{ github.sha }}

@@ -1,0 +1,102 @@
+name: Release pingpong
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "chapter5/pingpong_logoutput/**"
+  workflow_dispatch:
+
+env:
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  GKE_CLUSTER: kubernetes-course
+  GKE_ZONE: europe-north1-b
+  REGISTRY: europe-north1-docker.pkg.dev
+  REPOSITORY: kubernetes-course
+  PING_PONG_IMAGE: ping-pong
+  HASH_GENERATOR_IMAGE: hash-generator
+  HASH_OUTPUTTER_IMAGE: hash-outputter
+  APP_NAME: ping-pong
+  NAMESPACE: exercises
+
+jobs:
+  build-publish-deploy:
+    name: Build, Publish and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - uses: google-github-actions/auth@v3
+        with:
+          credentials_json: "${{ secrets.GKE_SA_KEY }}"
+
+      - name: "Set up Cloud SDK"
+        uses: google-github-actions/setup-gcloud@v3
+
+      - name: "Use gcloud CLI"
+        run: gcloud info
+
+      - run: gcloud --quiet auth configure-docker $REGISTRY
+
+      - name: "Get GKE credentials"
+        uses: "google-github-actions/get-gke-credentials@v3"
+        with:
+          cluster_name: "${{ env.GKE_CLUSTER }}"
+          project_id: "${{ env.PROJECT_ID }}"
+          location: "${{ env.GKE_ZONE }}"
+
+      - name: "Form the ping-pong image name"
+        run: echo
+          "PING_PONG_IMAGE_NAME=$REGISTRY/$PROJECT_ID/$REPOSITORY/$PING_PONG_IMAGE:$GITHUB_SHA"
+          >> $GITHUB_ENV
+
+      - name: Build ping-pong image
+        run: docker build --tag "$PING_PONG_IMAGE_NAME"
+          ./chapter5/pingpong_logoutput/ping_pong
+
+      - name: Publish ping-pong image
+        run: docker push $PING_PONG_IMAGE_NAME
+
+      - name: "Form the hash-generator image name"
+        run: echo
+          "HASH_GENERATOR_IMAGE_NAME=$REGISTRY/$PROJECT_ID/$REPOSITORY/$HASH_GENERATOR_IMAGE:$GITHUB_SHA"
+          >> $GITHUB_ENV
+
+      - name: Build hash-generator image
+        run: docker build --tag "$HASH_GENERATOR_IMAGE_NAME"
+          ./chapter5/pingpong_logoutput/log_output/hash_generator
+
+      - name: Publish hash-generator image
+        run: docker push $HASH_GENERATOR_IMAGE_NAME
+
+      - name: "Form the hash-outputter image name"
+        run: echo
+          "HASH_OUTPUTTER_IMAGE_NAME=$REGISTRY/$PROJECT_ID/$REPOSITORY/$HASH_OUTPUTTER_IMAGE:$GITHUB_SHA"
+          >> $GITHUB_ENV
+
+      - name: Build hash-outputter image
+        run: docker build --tag "$HASH_OUTPUTTER_IMAGE_NAME"
+          ./chapter5/pingpong_logoutput/log_output/hash_outputter
+
+      - name: Publish hash-outputter image
+        run: docker push $HASH_OUTPUTTER_IMAGE_NAME
+
+      - name: Set up Kustomize
+        uses: imranismail/setup-kustomize@v3
+
+      - name: Deploy
+        working-directory: ./chapter5/pingpong_logoutput
+        env:
+          POSTGRES_PASSWORD: ${{ secrets.PING_PONG_POSTGRES_PASSWORD }}
+        run: |-
+          printf 'POSTGRES_PASSWORD=%s\n' "$POSTGRES_PASSWORD" > ./ping_pong/.env.gke
+          kubectl create namespace $NAMESPACE || true
+          kustomize edit set namespace ${NAMESPACE}
+          kustomize edit set image PING_PONG=$PING_PONG_IMAGE_NAME
+          kustomize edit set image HASH_GENERATOR=$HASH_GENERATOR_IMAGE_NAME
+          kustomize edit set image HASH_OUTPUTTER=$HASH_OUTPUTTER_IMAGE_NAME
+          kustomize build . | kubectl apply -f -
+          kubectl wait --for=condition=Ready pod -l app=$APP_NAME -n $NAMESPACE --timeout=300s
+          kubectl get services -o wide

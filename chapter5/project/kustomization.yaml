@@ -2,20 +2,22 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: project
 resources:
-  - todo-app/manifests/namespace.yaml
-  - todo-app/manifests/deployment.yaml
-  - todo-app/manifests/pvc.yaml
-  - todo-app/manifests/service.yaml
-  - todo-app/manifests/gateway.yaml
-  - todo-app/manifests/route.yaml
-  - todo-backend/manifests/deployment.yaml
-  - todo-backend/manifests/hourly-todo.yaml
-  - todo-backend/manifests/service.yaml
-  - todo-backend/manifests/statefulset.yaml
-  - todo-backend/manifests/cronjob-postgres-backup.yaml
-  - todo-backend/manifests/postgres-config.yaml
+- todo-app/manifests/namespace.yaml
+- todo-app/manifests/deployment.yaml
+- todo-app/manifests/pvc.yaml
+- todo-app/manifests/service.yaml
+- todo-app/manifests/gateway.yaml
+- todo-app/manifests/route.yaml
+- todo-backend/manifests/deployment.yaml
+- todo-backend/manifests/hourly-todo.yaml
+- todo-backend/manifests/service.yaml
+- todo-backend/manifests/statefulset.yaml
+- todo-backend/manifests/cronjob-postgres-backup.yaml
+- todo-backend/manifests/postgres-config.yaml
 images:
-  - name: TODO_APP
-    newName: vesajo/todo-app@sha256:5d7d7a8e9df63339b7f8ac1b6c61e722b55c1bf8d8a291cafeadbefaeb4c4a7b
-  - name: TODO_BACKEND
-    newName: vesajo/todo-backend@sha256:8cfe18b9a01a71c44b1d79485eedfdf2ed591dfa224996ec456724bdfc12013c
+- name: TODO_APP
+  newName: vesajo/todo-app
+  newTag: 656bc31364589805aa966e505bf0f986031aaef3
+- name: TODO_BACKEND
+  newName: vesajo/todo-backend
+  newTag: 656bc31364589805aa966e505bf0f986031aaef3

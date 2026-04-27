@@ -11,7 +11,7 @@ spec:
       count: 10
       provider:
         prometheus:
-          address: http://kube-prometheus-stack-1769-prometheus.prometheus.svc.cluster.local:9090
+          address: http://kube-prometheus-stack-1777-prometheus.prometheus.svc.cluster.local:9090
           query: |
             scalar (
               sum(

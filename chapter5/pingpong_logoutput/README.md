@@ -4,19 +4,15 @@
 
 ### Manual deployment
 
-1. Create the file `ping_pong/.env.gke` based on the provided example file:
+1. Create the secret pingpong-postgres-password:
 
-   ```
-   cp ping_pong/.env.gke.example ping_pong/.env.gke
-   ```
+In addition, you need to add a Secret for the Ping Pong application's PostgreSQL database. The file <code>./ping_pong/manifests/pingpong-postgres-password.enc.yaml</code> contains the required values encrypted with the sops and age tools. If you have the private key in the default location ~/.config/sops/age/, you can apply the secret to the cluster with the following command:
 
-   Then fill in your password in the new file:
+```
+sops -d ping_pong/manifests/pingpong-postgres-password.enc.yaml | kubectl apply -f -
+```
 
-   ```
-   POSTGRES_PASSWORD=<your-password>
-   ```
-
-   This password is used for the Ping Pong application's PostgreSQL database. The password used in the cluster is stored encrypted in `ping_pong/manifests/pingpong-postgres-password.enc.yaml`.
+This password is used for the Ping Pong application's PostgreSQL database. The password used in the cluster is stored encrypted in `ping_pong/manifests/pingpong-postgres-password.enc.yaml`.
 
 2. Create the `exercises` namespace:
 

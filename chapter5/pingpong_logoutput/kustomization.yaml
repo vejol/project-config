@@ -15,10 +15,10 @@ resources:
 images:
 - name: HASH_GENERATOR
   newName: vesajo/hash-generator
-  newTag: ba5a81329bd278d8576e27d3652b4b996b9e753c
+  newTag: 12d4a5820a857b501ab21b701981a58f40792dcc
 - name: HASH_OUTPUTTER
   newName: vesajo/hash-outputter
-  newTag: ba5a81329bd278d8576e27d3652b4b996b9e753c
+  newTag: 12d4a5820a857b501ab21b701981a58f40792dcc
 - name: PING_PONG
   newName: vesajo/ping-pong
-  newTag: ba5a81329bd278d8576e27d3652b4b996b9e753c
+  newTag: 12d4a5820a857b501ab21b701981a58f40792dcc

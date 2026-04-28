@@ -40,7 +40,7 @@ jobs:
           kustomize-version: "5.8.1"
 
       - name: Use right images
-        working-directory: ./chapter5/project
+        working-directory: ./chapter5/project/base
         run: |-
           kustomize edit set image TODO_APP=${{ secrets.DOCKERHUB_USERNAME }}/todo-app:$GITHUB_SHA
           kustomize edit set image TODO_BACKEND=${{ secrets.DOCKERHUB_USERNAME }}/todo-backend:$GITHUB_SHA
@@ -48,5 +48,5 @@ jobs:
       - name: Commit kustomization.yaml to GitHub
         uses: EndBug/add-and-commit@v10
         with:
-          add: "chapter5/project/kustomization.yaml"
+          add: "chapter5/project/base/kustomization.yaml"
           message: New version released ${{ github.sha }}

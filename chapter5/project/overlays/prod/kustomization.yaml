@@ -3,17 +3,17 @@ kind: Kustomization
 namespace: project-prod
 
 resources:
-  - ./../../base
+- ./../../base
 
 namePrefix: prod-
 
 images:
-  - name: BROADCASTER
-    newName: vesajo/broadcaster
-    newTag: 95c6141c5c0673ef47a252519a250a33b0882aca
-  - name: TODO_APP
-    newName: vesajo/todo-app
-    newTag: 95c6141c5c0673ef47a252519a250a33b0882aca
-  - name: TODO_BACKEND
-    newName: vesajo/todo-backend
-    newTag: 95c6141c5c0673ef47a252519a250a33b0882aca
+- name: BROADCASTER
+  newName: vesajo/broadcaster
+  newTag: 124352a93c0bf7585b045a99abb8809dde36002c
+- name: TODO_APP
+  newName: vesajo/todo-app
+  newTag: 124352a93c0bf7585b045a99abb8809dde36002c
+- name: TODO_BACKEND
+  newName: vesajo/todo-backend
+  newTag: 124352a93c0bf7585b045a99abb8809dde36002c

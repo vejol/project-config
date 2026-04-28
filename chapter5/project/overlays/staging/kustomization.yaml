@@ -3,17 +3,20 @@ kind: Kustomization
 namespace: project-staging
 
 resources:
-- ./../../base
+  - ./../../base
 
 namePrefix: staging-
 
+patches:
+  - path: patches/postgres-config.yaml
+
 images:
-- name: BROADCASTER
-  newName: vesajo/broadcaster
-  newTag: 124352a93c0bf7585b045a99abb8809dde36002c
-- name: TODO_APP
-  newName: vesajo/todo-app
-  newTag: 124352a93c0bf7585b045a99abb8809dde36002c
-- name: TODO_BACKEND
-  newName: vesajo/todo-backend
-  newTag: 124352a93c0bf7585b045a99abb8809dde36002c
+  - name: BROADCASTER
+    newName: vesajo/broadcaster
+    newTag: 124352a93c0bf7585b045a99abb8809dde36002c
+  - name: TODO_APP
+    newName: vesajo/todo-app
+    newTag: 124352a93c0bf7585b045a99abb8809dde36002c
+  - name: TODO_BACKEND
+    newName: vesajo/todo-backend
+    newTag: 124352a93c0bf7585b045a99abb8809dde36002c

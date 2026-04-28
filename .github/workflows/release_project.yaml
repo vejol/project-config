@@ -59,6 +59,7 @@ jobs:
         with:
           add: "chapter5/project/overlays/staging/kustomization.yaml"
           message: New staging version released ${{ github.sha }}
+          push: "origin HEAD:refs/heads/main"
 
       - name: Use new images for production if commit is tagged
         if: startsWith(github.ref, 'refs/tags/')
@@ -74,3 +75,4 @@ jobs:
         with:
           add: "chapter5/project/overlays/prod/kustomization.yaml"
           message: New production version released ${{ github.sha }}
+          push: "origin HEAD:refs/heads/main"

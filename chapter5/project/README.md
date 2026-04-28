@@ -2,6 +2,12 @@
 
 ## How to deploy to Google Cloud
 
+Apply application production and staging versions to ArgoCD with command:
+
+```
+kubectl apply -n argocd -f application-prod.yaml -f application-staging.yaml
+```
+
 The application is managed by ArgoCD on the cluster. Simply commit and push your changes to GitHub — GitHub Actions and ArgoCD will take care of the rest.
 
 The secrets must be added manually:

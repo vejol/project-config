@@ -5,6 +5,8 @@ on:
     branches: [ main ]
     paths:
       - "chapter5/project/**"
+    tags:
+      - "*"
   workflow_dispatch:
 
 jobs:
@@ -45,15 +47,30 @@ jobs:
         with:
           kustomize-version: "5.8.1"
 
-      - name: Use right images
-        working-directory: ./chapter5/project/base
+      - name: Use new images for staging
+        working-directory: ./chapter5/project/overlays/staging
         run: |-
           kustomize edit set image TODO_APP=${{ secrets.DOCKERHUB_USERNAME }}/todo-app:$GITHUB_SHA
           kustomize edit set image TODO_BACKEND=${{ secrets.DOCKERHUB_USERNAME }}/todo-backend:$GITHUB_SHA
           kustomize edit set image BROADCASTER=${{ secrets.DOCKERHUB_USERNAME }}/broadcaster:$GITHUB_SHA  
 
-      - name: Commit kustomization.yaml to GitHub
+      - name: Commit staging/kustomization.yaml to GitHub
         uses: EndBug/add-and-commit@v10
         with:
-          add: "chapter5/project/base/kustomization.yaml"
-          message: New version released ${{ github.sha }}
+          add: "chapter5/project/overlays/staging/kustomization.yaml"
+          message: New staging version released ${{ github.sha }}
+
+      - name: Use new images for production if commit is tagged
+        if: startsWith(github.ref, 'refs/tags/')
+        working-directory: ./chapter5/project/overlays/prod
+        run: |-
+          kustomize edit set image TODO_APP=${{ secrets.DOCKERHUB_USERNAME }}/todo-app:$GITHUB_SHA
+          kustomize edit set image TODO_BACKEND=${{ secrets.DOCKERHUB_USERNAME }}/todo-backend:$GITHUB_SHA
+          kustomize edit set image BROADCASTER=${{ secrets.DOCKERHUB_USERNAME }}/broadcaster:$GITHUB_SHA  
+
+      - name: Commit prod/kustomization.yaml to GitHub if commit is tagged
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: EndBug/add-and-commit@v10
+        with:
+          add: "chapter5/project/overlays/prod/kustomization.yaml"
+          message: New production version released ${{ github.sha }}

@@ -10,10 +10,10 @@ namePrefix: staging-
 images:
 - name: BROADCASTER
   newName: vesajo/broadcaster
-  newTag: 96f58cec07c39156f5b1e831399da6212a32e9e4
+  newTag: 124352a93c0bf7585b045a99abb8809dde36002c
 - name: TODO_APP
   newName: vesajo/todo-app
-  newTag: 96f58cec07c39156f5b1e831399da6212a32e9e4
+  newTag: 124352a93c0bf7585b045a99abb8809dde36002c
 - name: TODO_BACKEND
   newName: vesajo/todo-backend
-  newTag: 96f58cec07c39156f5b1e831399da6212a32e9e4
+  newTag: 124352a93c0bf7585b045a99abb8809dde36002c

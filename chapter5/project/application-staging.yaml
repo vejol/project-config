@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/vesajo/kubernetes-submissions
+    repoURL: https://github.com/vejol/kubernetes-submissions
     path: chapter5/project/overlays/staging
     targetRevision: HEAD
   destination:

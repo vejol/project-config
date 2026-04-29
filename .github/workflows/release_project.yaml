@@ -39,7 +39,7 @@ jobs:
       - name: Build and publish broadcaster
         run: |-
           docker build --tag "${{ secrets.DOCKERHUB_USERNAME }}/broadcaster:$GITHUB_SHA" \
-            ./chapter5/project/todo-backend
+            ./chapter5/project/broadcaster
           docker push "${{ secrets.DOCKERHUB_USERNAME }}/broadcaster:$GITHUB_SHA"
 
       - name: Set up Kustomize

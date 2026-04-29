@@ -3,23 +3,23 @@ kind: Kustomization
 namespace: project-prod
 
 resources:
-  - ./../../base
+- ./../../base
 
 namePrefix: prod-
 
 patches:
-  - path: patches/postgres-config.yaml
-  - path: patches/todo-app-deployment.yaml
-  - path: patches/hourly-todo.yaml
-  - path: patches/route.yaml
+- path: patches/postgres-config.yaml
+- path: patches/todo-app-deployment.yaml
+- path: patches/hourly-todo.yaml
+- path: patches/route.yaml
 
 images:
-  - name: BROADCASTER
-    newName: vesajo/broadcaster
-    newTag: 124352a93c0bf7585b045a99abb8809dde36002c
-  - name: TODO_APP
-    newName: vesajo/todo-app
-    newTag: 124352a93c0bf7585b045a99abb8809dde36002c
-  - name: TODO_BACKEND
-    newName: vesajo/todo-backend
-    newTag: 124352a93c0bf7585b045a99abb8809dde36002c
+- name: BROADCASTER
+  newName: vesajo/broadcaster
+  newTag: 9b6435200bba40e194b838ac661984784f87e3b1
+- name: TODO_APP
+  newName: vesajo/todo-app
+  newTag: 9b6435200bba40e194b838ac661984784f87e3b1
+- name: TODO_BACKEND
+  newName: vesajo/todo-backend
+  newTag: 9b6435200bba40e194b838ac661984784f87e3b1

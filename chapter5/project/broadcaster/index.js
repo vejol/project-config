@@ -25,8 +25,7 @@ for (const subject of subjects) {
       if (FULLSTACK_DISCORD_WEBHOOK) {
         axios.post(FULLSTACK_DISCORD_WEBHOOK, message)
       } else {
-        const now = new Date()
-        console.log(`${now} INFO: ${message.content}`)
+        console.log(`INFO: ${message.content}`)
       }
     },
   })

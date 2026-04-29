@@ -1,61 +1,23 @@
-# kubernetes-submissions
+# Project (Todo App)
 
-Submissions for DevOps with Kubernetes course in January 2026
+## How to deploy to Google Cloud
 
-## Exercises
+Apply application production and staging versions to ArgoCD with command:
 
-### Chapter 2
+```
+kubectl apply -n argocd -f application-prod.yaml -f application-staging.yaml
+```
 
-- [1.1](https://github.com/vejol/kubernetes-submissions/tree/1.1/log_output)
-- [1.2](https://github.com/vejol/kubernetes-submissions/tree/1.2/project)
-- [1.3](https://github.com/vejol/kubernetes-submissions/tree/1.3/log_output)
-- [1.4](https://github.com/vejol/kubernetes-submissions/tree/1.4/project)
-- [1.5](https://github.com/vejol/kubernetes-submissions/tree/1.5/project)
-- [1.6](https://github.com/vejol/kubernetes-submissions/tree/1.6/project)
-- [1.7](https://github.com/vejol/kubernetes-submissions/tree/1.7/log_output)
-- [1.8](https://github.com/vejol/kubernetes-submissions/tree/1.6/project)
-- [1.9](https://github.com/vejol/kubernetes-submissions/tree/1.9/ping_pong)
-- [1.10](https://github.com/vejol/kubernetes-submissions/tree/1.10/log_output)
-- [1.11](https://github.com/vejol/kubernetes-submissions/tree/1.11/log_output)
-- [1.12](https://github.com/vejol/kubernetes-submissions/tree/1.12/project)
-- [1.13](https://github.com/vejol/kubernetes-submissions/tree/1.13/project)
+The application is managed by ArgoCD on the cluster. Simply commit and push your changes to GitHub — GitHub Actions and ArgoCD will take care of the rest.
 
-### Chapter 3
+The secrets must be added manually:
 
-- [2.1](https://github.com/vejol/kubernetes-submissions/tree/2.1/chapter3/ping_pong)
-- [2.2](https://github.com/vejol/kubernetes-submissions/tree/2.2/chapter3/project)
-- [2.3](https://github.com/vejol/kubernetes-submissions/tree/2.3/chapter3/pingpong_logoutput)
-- [2.4](https://github.com/vejol/kubernetes-submissions/tree/2.4/chapter3/project)
-- [2.5](https://github.com/vejol/kubernetes-submissions/tree/2.5/chapter3/pingpong_logoutput)
-- [2.6](https://github.com/vejol/kubernetes-submissions/tree/2.6/chapter3/)
-- [2.7](https://github.com/vejol/kubernetes-submissions/tree/2.7/chapter3/pingpong_logoutput)
-- [2.8](https://github.com/vejol/kubernetes-submissions/tree/2.8/chapter3/project)
-- [2.9](https://github.com/vejol/kubernetes-submissions/tree/2.9/chapter3/project)
-- [2.10](https://github.com/vejol/kubernetes-submissions/tree/2.10/chapter3/project)
+- The Todo App requires a Secret for PostgreSQL database credentials
+- Automatic database backup needs a Secret for the Google Service Account
 
-### Chapter 4
+The folder `./todo-backend/manifests/` contains the required secrets encrypted using the `sops` and `age` tools. If you have the private key in your possession and it is stored in the default location `~/.config/sops/age/`, you can apply the them to the cluster with the following commands:
 
-- [3.1](https://github.com/vejol/kubernetes-submissions/tree/3.1/chapter4/pingpong_logoutput)
-- [3.2](https://github.com/vejol/kubernetes-submissions/tree/3.2/chapter4/pingpong_logoutput)
-- [3.3](https://github.com/vejol/kubernetes-submissions/tree/3.3/chapter4/pingpong_logoutput)
-- [3.4](https://github.com/vejol/kubernetes-submissions/tree/3.4/chapter4/pingpong_logoutput)
-- [3.5](https://github.com/vejol/kubernetes-submissions/tree/3.5/chapter4/project)
-- [3.6](https://github.com/vejol/kubernetes-submissions/tree/3.6/chapter4/project)
-- [3.7](https://github.com/vejol/kubernetes-submissions/tree/3.7/chapter4/project)
-- [3.8](https://github.com/vejol/kubernetes-submissions/tree/3.8/chapter4/project)
-- [3.9](https://github.com/vejol/kubernetes-submissions/tree/3.9/chapter4/project)
-- [3.10](https://github.com/vejol/kubernetes-submissions/tree/3.10/chapter4/project)
-- [3.11](https://github.com/vejol/kubernetes-submissions/tree/3.11/chapter4/project)
-- [3.12](https://github.com/vejol/kubernetes-submissions/tree/3.12/chapter4/project)
-
-### Chapter 5
-
-- [4.1](https://github.com/vejol/kubernetes-submissions/tree/4.1/chapter5/pingpong_logoutput)
-- [4.2](https://github.com/vejol/kubernetes-submissions/tree/4.2/chapter5/project)
-- [4.3](https://github.com/vejol/kubernetes-submissions/tree/4.3/chapter5/)
-- [4.4](https://github.com/vejol/kubernetes-submissions/tree/4.4/chapter5/pingpong_logoutput)
-- [4.5](https://github.com/vejol/kubernetes-submissions/tree/4.5/chapter5/project)
-- [4.6](https://github.com/vejol/kubernetes-submissions/tree/4.6/chapter5/project/broadcaster)
-- [4.7](https://github.com/vejol/kubernetes-submissions/tree/4.7/chapter5/pingpong_logoutput)
-- [4.8](https://github.com/vejol/kubernetes-submissions/tree/4.8/chapter5/project)
-- [4.9](https://github.com/vejol/kubernetes-submissions/tree/4.9/chapter5/project)
+```
+sops -d todo-backend/manifests/google-sa-secret.enc.yaml | kubectl apply -f -
+sops -d todo-backend/manifests/secret.enc.yaml | kubectl apply -f -
+```

@@ -1,6 +1,0 @@
-manifests
-node_modules
-.env
-.env.*
-files
-.gitignore

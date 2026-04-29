@@ -1,6 +1,0 @@
-manifests
-node_modules
-public/images
-.env
-.env.*
-.gitignore

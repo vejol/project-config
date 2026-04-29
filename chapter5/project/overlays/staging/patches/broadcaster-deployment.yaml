@@ -8,7 +8,4 @@ spec:
     spec:
       containers:
         - name: broadcaster
-          envFrom:
-            - secretRef:
-                name: discord-webhook
-              $patch: delete
+          envFrom: []

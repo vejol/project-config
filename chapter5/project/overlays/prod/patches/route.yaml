@@ -6,3 +6,18 @@ metadata:
 spec:
   parentRefs:
     - name: prod-project-gateway
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /todos
+      backendRefs:
+        - name: prod-todo-backend-svc
+          port: 80
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: prod-todo-app-svc
+          port: 80

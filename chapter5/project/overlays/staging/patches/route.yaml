@@ -6,3 +6,18 @@ metadata:
 spec:
   parentRefs:
     - name: staging-project-gateway
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /todos
+      backendRefs:
+        - name: staging-todo-backend-svc
+          port: 80
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: staging-todo-app-svc
+          port: 80

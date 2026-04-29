@@ -23,6 +23,7 @@ spec:
           envFrom:
             - secretRef:
                 name: discord-webhook
+                optional: true
           resources:
             limits:
               cpu: "100m"

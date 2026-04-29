@@ -11,6 +11,7 @@ patches:
   - path: patches/postgres-config.yaml
   - path: patches/todo-app-deployment.yaml
   - path: patches/hourly-todo.yaml
+  - path: patches/route.yaml
 
 images:
   - name: BROADCASTER

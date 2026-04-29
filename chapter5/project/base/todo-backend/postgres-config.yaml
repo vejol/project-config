@@ -3,6 +3,7 @@ kind: ConfigMap
 metadata:
   name: postgres-config
 data:
+  POSTGRES_HOST: "" # Overridden by overlay patch
   POSTGRES_PORT: "5432"
   POSTGRES_USER: "postgres"
   POSTGRES_DATABASE: "postgres"

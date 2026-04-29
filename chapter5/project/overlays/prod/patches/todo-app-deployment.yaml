@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-app-dep
+spec:
+  template:
+    spec:
+      containers:
+        - name: todo-app
+          env:
+            - name: BACKEND_URL
+              value: http://prod-todo-backend-svc:80

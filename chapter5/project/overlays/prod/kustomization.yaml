@@ -4,7 +4,7 @@ namespace: project-prod
 
 resources:
   - ./../../base
-  - ./../../base/todo-backend/cronjob-postgres-backup.yaml
+  - cronjob-postgres-backup.yaml
 
 namePrefix: prod-
 

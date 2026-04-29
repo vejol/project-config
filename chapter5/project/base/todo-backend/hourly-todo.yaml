@@ -26,10 +26,10 @@ spec:
                   curl -X POST $BACKEND_URL \
                     -H "Content-Type: application/json" \
                     -d "{\"content\": \"Read $ARTICLE_URL\"}"
-          resources:
-            limits:
-              cpu: "100m"
-              memory: "100Mi"
-            requests:
-              cpu: "10m"
-              memory: "40Mi"
+              resources:
+                limits:
+                  cpu: "100m"
+                  memory: "100Mi"
+                requests:
+                  cpu: "10m"
+                  memory: "40Mi"

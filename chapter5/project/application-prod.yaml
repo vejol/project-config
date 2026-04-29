@@ -18,12 +18,3 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-  ignoreDifferences:
-    - group: batch
-      kind: CronJob
-      jqPathExpressions:
-        - .spec.jobTemplate.spec.template.spec.containers[].imagePullPolicy
-        - .spec.jobTemplate.spec.template.spec.containers[].terminationMessagePath
-        - .spec.jobTemplate.spec.template.spec.containers[].terminationMessagePolicy
-        - .spec.jobTemplate.spec.template.metadata.creationTimestamp
-        - .status

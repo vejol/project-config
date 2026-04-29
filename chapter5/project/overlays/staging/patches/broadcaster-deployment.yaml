@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: broadcaster-dep
+spec:
+  template:
+    spec:
+      containers:
+        - name: broadcaster
+          envFrom:
+            - secretRef:
+                name: discord-webhook
+              $patch: delete

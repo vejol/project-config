@@ -10,6 +10,7 @@ namePrefix: prod-
 patches:
   - path: patches/postgres-config.yaml
   - path: patches/todo-app-deployment.yaml
+  - path: patches/hourly-todo.yaml
 
 images:
   - name: BROADCASTER

@@ -9,8 +9,6 @@ spec:
     repoURL: https://github.com/vejol/kubernetes-submissions
     path: chapter5/project/overlays/staging
     targetRevision: HEAD
-    kustomize:
-      buildOptions: --enable-helm
   destination:
     server: https://kubernetes.default.svc
     namespace: project-staging

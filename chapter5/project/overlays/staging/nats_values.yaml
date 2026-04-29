@@ -1,0 +1,19 @@
+auth:
+  enabled: false
+
+image:
+  registry: docker.io
+  repository: bitnamilegacy/nats
+  tag: 2.11.8-debian-12-r0
+
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    namespace: prometheus
+    labels:
+      release: kube-prometheus-stack-1769689527
+  image:
+    registry: docker.io
+    repository: bitnamilegacy/nats-exporter
+    tag: 0.17.3-debian-12-r8

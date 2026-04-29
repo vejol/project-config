@@ -12,7 +12,7 @@ helmCharts:
     repo: oci://registry-1.docker.io/bitnamicharts
     version: 9.0.28
     releaseName: my-nats
-    valuesFile: ./../../base/nats_values.yaml
+    valuesFile: nats_values.yaml
 
 patches:
   - path: patches/postgres-config.yaml

@@ -3,30 +3,30 @@ kind: Kustomization
 namespace: project-staging
 
 resources:
-  - ./../../base
+- ./../../base
 
 namePrefix: staging-
 
 helmCharts:
-  - name: nats
-    releaseName: my-nats
-    repo: oci://registry-1.docker.io/bitnamicharts
-    valuesFile: nats_values.yaml
-    version: 9.0.28
+- name: nats
+  releaseName: my-nats
+  repo: oci://registry-1.docker.io/bitnamicharts
+  valuesFile: nats_values.yaml
+  version: 9.0.28
 
 patches:
-  - path: patches/postgres-config.yaml
-  - path: patches/todo-app-deployment.yaml
-  - path: patches/hourly-todo.yaml
-  - path: patches/route.yaml
+- path: patches/postgres-config.yaml
+- path: patches/todo-app-deployment.yaml
+- path: patches/hourly-todo.yaml
+- path: patches/route.yaml
 
 images:
-  - name: BROADCASTER
-    newName: vesajo/broadcaster
-    newTag: 738b002b25c8e23a16ad24bf995e404f7135193d
-  - name: TODO_APP
-    newName: vesajo/todo-app
-    newTag: 738b002b25c8e23a16ad24bf995e404f7135193d
-  - name: TODO_BACKEND
-    newName: vesajo/todo-backend
-    newTag: 738b002b25c8e23a16ad24bf995e404f7135193d
+- name: BROADCASTER
+  newName: vesajo/broadcaster
+  newTag: ef36361949c7333d11ba3bb45c4fcdfbb9433376
+- name: TODO_APP
+  newName: vesajo/todo-app
+  newTag: ef36361949c7333d11ba3bb45c4fcdfbb9433376
+- name: TODO_BACKEND
+  newName: vesajo/todo-backend
+  newTag: ef36361949c7333d11ba3bb45c4fcdfbb9433376

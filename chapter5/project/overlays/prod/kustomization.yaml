@@ -3,33 +3,33 @@ kind: Kustomization
 namespace: project-prod
 
 resources:
-  - ./../../base
-  - cronjob-postgres-backup.yaml
+- ./../../base
+- cronjob-postgres-backup.yaml
 
 namePrefix: prod-
 
 helmCharts:
-  - name: nats
-    repo: oci://registry-1.docker.io/bitnamicharts
-    version: 9.0.28
-    releaseName: my-nats
-    valuesFile: nats_values.yaml
+- name: nats
+  releaseName: my-nats
+  repo: oci://registry-1.docker.io/bitnamicharts
+  valuesFile: nats_values.yaml
+  version: 9.0.28
 
 patches:
-  - path: patches/postgres-config.yaml
-  - path: patches/todo-app-deployment.yaml
-  - path: patches/hourly-todo.yaml
-  - path: patches/route.yaml
-  - path: patches/broadcaster-deployment.yaml
-  - path: patches/todo-backend-deployment.yaml
+- path: patches/postgres-config.yaml
+- path: patches/todo-app-deployment.yaml
+- path: patches/hourly-todo.yaml
+- path: patches/route.yaml
+- path: patches/broadcaster-deployment.yaml
+- path: patches/todo-backend-deployment.yaml
 
 images:
-  - name: BROADCASTER
-    newName: vesajo/broadcaster
-    newTag: 9b6435200bba40e194b838ac661984784f87e3b1
-  - name: TODO_APP
-    newName: vesajo/todo-app
-    newTag: 9b6435200bba40e194b838ac661984784f87e3b1
-  - name: TODO_BACKEND
-    newName: vesajo/todo-backend
-    newTag: 9b6435200bba40e194b838ac661984784f87e3b1
+- name: BROADCASTER
+  newName: vesajo/broadcaster
+  newTag: b0285035d1c80e9611bcedc3b973c6af7c207d1d
+- name: TODO_APP
+  newName: vesajo/todo-app
+  newTag: b0285035d1c80e9611bcedc3b973c6af7c207d1d
+- name: TODO_BACKEND
+  newName: vesajo/todo-backend
+  newTag: b0285035d1c80e9611bcedc3b973c6af7c207d1d

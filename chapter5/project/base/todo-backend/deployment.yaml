@@ -28,7 +28,7 @@ spec:
             - name: PORT
               value: "3000"
             - name: NATS_URL
-              value: "nats://my-nats:4222"
+              value: "" # Overridden by overlay patch
           envFrom:
             - configMapRef:
                 name: postgres-config

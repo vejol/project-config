@@ -20,6 +20,7 @@ patches:
   - path: patches/hourly-todo.yaml
   - path: patches/route.yaml
   - path: patches/broadcaster-deployment.yaml
+  - path: patches/todo-backend-deployment.yaml
 
 images:
   - name: BROADCASTER

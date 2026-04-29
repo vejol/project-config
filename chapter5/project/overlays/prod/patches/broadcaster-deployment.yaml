@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: broadcaster-dep
+  namespace: project
+spec:
+  template:
+    spec:
+      containers:
+        - name: broadcaster
+          env:
+            - name: NATS_URL
+              value: "nats://prod-my-nats:4222"

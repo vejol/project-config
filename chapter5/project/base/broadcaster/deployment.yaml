@@ -15,7 +15,8 @@ spec:
     spec:
       containers:
         - name: broadcaster
-          image: vesajo/broadcaster
+          image: BROADCASTER
+          imagePullPolicy: Always
           env:
             - name: NATS_URL
               value: "nats://my-nats.default.svc.cluster.local:4222"

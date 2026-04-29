@@ -12,6 +12,5 @@ resources:
   - todo-backend/hourly-todo.yaml
   - todo-backend/service.yaml
   - todo-backend/statefulset.yaml
-  - todo-backend/cronjob-postgres-backup.yaml
   - todo-backend/postgres-config.yaml
   - broadcaster/deployment.yaml

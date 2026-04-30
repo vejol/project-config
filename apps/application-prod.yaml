@@ -6,8 +6,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/vejol/kubernetes-submissions
-    path: chapter5/project/overlays/prod
+    repoURL: https://github.com/vejol/project-config
+    path: overlays/prod
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc

@@ -1,20 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: project-staging
+  name: project-apps
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: https://github.com/vejol/kubernetes-submissions
-    path: chapter5/project/overlays/staging
+    repoURL: https://github.com/vejol/project-config
+    path: apps/
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
-    namespace: project-staging
+    namespace: argocd
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-      - CreateNamespace=true

@@ -26,10 +26,10 @@ patches:
 images:
 - name: BROADCASTER
   newName: vesajo/broadcaster
-  newTag: 40c908192430ad58f12de24fcc0a7d641a6bc3ad
+  newTag: 2233e234f65804cb5fa5014b57ea3cf78f99589b
 - name: TODO_APP
   newName: vesajo/todo-app
-  newTag: 40c908192430ad58f12de24fcc0a7d641a6bc3ad
+  newTag: 2233e234f65804cb5fa5014b57ea3cf78f99589b
 - name: TODO_BACKEND
   newName: vesajo/todo-backend
-  newTag: 40c908192430ad58f12de24fcc0a7d641a6bc3ad
+  newTag: 2233e234f65804cb5fa5014b57ea3cf78f99589b
